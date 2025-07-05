@@ -1,0 +1,12 @@
+{
+  "shieldStrike": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "shieldStrike",
+        "stream": false
+      }
+    ]
+  }
+}
+

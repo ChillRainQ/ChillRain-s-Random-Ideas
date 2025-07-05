@@ -1,0 +1,31 @@
+# Draconic Sword Material Library
+newmtl core_glow
+map_Kd textures/models/tools/chaotic_staff7.png
+Ke 1.0 1.0 1.0
+d 0.7
+
+newmtl metal_detail
+map_Kd textures/models/tools/chaotic_staff6.png
+Ks 0.8 0.8 0.8
+Ns 300
+
+newmtl base_body
+map_Kd textures/models/tools/chaotic_staff5.png
+Ka 0.2 0.2 0.2
+
+newmtl energy_rune
+map_Kd textures/models/tools/chaotic_staff4.png
+d 0.5
+illum 4
+
+newmtl ornament
+map_Kd textures/models/tools/chaotic_staff3.png
+
+newmtl crystal
+map_Kd textures/models/tools/chaotic_staff2.png
+Ke 0.6 0.6 1.0
+d 0.6
+
+newmtl particle
+map_Kd textures/models/tools/chaotic_staff.png
+Ke 1.0 0.8 0.2
