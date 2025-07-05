@@ -1,16 +1,13 @@
 package com.chillrain.chillrainrandomideas.items.weapons;
 
-import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.brandon3055.draconicevolution.common.items.armor.ICustomArmor;
 import com.chillrain.chillrainrandomideas.Constant;
 import com.chillrain.chillrainrandomideas.ItemName;
 import com.chillrain.chillrainrandomideas.NBTConstant;
 import com.chillrain.chillrainrandomideas.enums.SwordMode;
-import com.chillrain.chillrainrandomideas.handler.SpecialArmorHandler;
 import com.chillrain.chillrainrandomideas.interfaces.AdvancedTool;
 import com.chillrain.chillrainrandomideas.items.ModItems;
 import com.chillrain.chillrainrandomideas.utils.NBTUtil;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,11 +20,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
-import net.minecraftforge.common.ISpecialArmor;
 
 import java.util.List;
 

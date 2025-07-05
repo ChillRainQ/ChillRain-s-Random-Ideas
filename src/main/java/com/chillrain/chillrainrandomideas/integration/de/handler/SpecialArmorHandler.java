@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.handler;
+package com.chillrain.chillrainrandomideas.integration.de.handler;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
@@ -9,26 +9,20 @@ import com.brandon3055.draconicevolution.common.items.armor.DraconicArmor;
 import com.brandon3055.draconicevolution.common.network.ShieldHitPacket;
 import com.brandon3055.draconicevolution.common.utills.IUpgradableItem;
 import com.brandon3055.draconicevolution.integration.ModHelper;
-import com.chillrain.chillrainrandomideas.Config;
+import com.chillrain.chillrainrandomideas.integration.de.Config;
 import com.chillrain.chillrainrandomideas.Constant;
-import com.chillrain.chillrainrandomideas.interfaces.ISpecialShieldArmor;
-import cpw.mods.fml.common.Loader;
+import com.chillrain.chillrainrandomideas.integration.de.interfaces.ISpecialShieldArmor;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import mods.flammpfeil.slashblade.ItemSlashBlade;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import java.util.Arrays;
 
@@ -43,6 +37,7 @@ public class SpecialArmorHandler {
      * 玩家被攻击时事件响应
      * @param event
      */
+    @Optional.Method(modid = Constant.DE)
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onPlayerAttacked(LivingAttackEvent event){
         if (!(event.entityLiving instanceof EntityPlayer)) return;
@@ -56,6 +51,7 @@ public class SpecialArmorHandler {
         }
 
     }
+    @Optional.Method(modid = Constant.DE)
     private static void hasChaos(LivingAttackEvent event, SpecialArmorSummary summery){
         if (event.isCanceled()) {
             return;
@@ -115,6 +111,7 @@ public class SpecialArmorHandler {
             player.attackEntityFrom(event.source, hitAmount - totalAbsorbed);
         }
     }
+    @Optional.Method(modid = Constant.DE)
     private static void allChaos(LivingAttackEvent event, SpecialArmorSummary summery){
         //todo 混沌套套装效果被攻击时逻辑 1.次数盾（避免高额伤害）
         if (event.isCanceled() || ADMIN_KILL.damageType.equals(event.source.damageType) || summery == null){
@@ -204,6 +201,8 @@ public class SpecialArmorHandler {
      * @param summary
      * @return
      */
+
+    @Optional.Method(modid = Constant.DE)
     private static boolean applySpecialArmorDamageBlocking(LivingAttackEvent event, SpecialArmorSummary summary){
         // 无Special护甲
         if (summary == null){
@@ -238,6 +237,7 @@ public class SpecialArmorHandler {
      *  玩家死亡时事件响应
      * @param event
      */
+    @Optional.Method(modid = Constant.DE)
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onPlayerDeath(LivingDeathEvent event){
 //        CustomArmorHandler.onPlayerDeath(event);

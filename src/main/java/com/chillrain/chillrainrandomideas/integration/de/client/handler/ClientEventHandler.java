@@ -1,8 +1,8 @@
-package com.chillrain.chillrainrandomideas.client.handler;
+package com.chillrain.chillrainrandomideas.integration.de.client.handler;
 
 import com.brandon3055.draconicevolution.client.handler.ResourceHandler;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
-import com.chillrain.chillrainrandomideas.items.armors.ChaosDraconicArmor;
+import com.chillrain.chillrainrandomideas.integration.de.items.armors.ChaosDraconicArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemArmor;

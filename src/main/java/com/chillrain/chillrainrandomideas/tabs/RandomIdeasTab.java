@@ -1,11 +1,9 @@
-package com.chillrain.chillrainrandomideas.client.tabs;
+package com.chillrain.chillrainrandomideas.tabs;
 
-import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.chillrain.chillrainrandomideas.items.ModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

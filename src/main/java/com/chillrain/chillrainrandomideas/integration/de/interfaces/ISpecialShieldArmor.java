@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.interfaces;
+package com.chillrain.chillrainrandomideas.integration.de.interfaces;
 
 import com.brandon3055.draconicevolution.common.items.armor.ICustomArmor;
 

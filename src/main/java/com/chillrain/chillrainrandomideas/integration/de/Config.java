@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas;
+package com.chillrain.chillrainrandomideas.integration.de;
 
 /**
  * Config
@@ -8,7 +8,6 @@ package com.chillrain.chillrainrandomideas;
 public class Config {
     public static float timeShieldValue = 2f;
     public static int chaoticDraconicArmorMaxUpgrades = 18;
-    public static int chaoticDraconicArmorMaxUpgradesCount = 6;
     public static int chaoticDraconicArmorMaxCapacityUpgradePoints = 70;
     public static int chaoticDraconicArmorBaseStorage = 64000000;
     public static int chaoticDraconicArmorPerUpgradeStorage = 6400000;

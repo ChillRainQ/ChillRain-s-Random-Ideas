@@ -1,10 +1,11 @@
 package com.chillrain.chillrainrandomideas;
 
-import com.brandon3055.draconicevolution.common.lib.References;
 import com.chillrain.chillrainrandomideas.client.ClientProxy;
-import com.chillrain.chillrainrandomideas.client.tabs.RandomIdeasTab;
 import com.chillrain.chillrainrandomideas.handler.HandlerManager;
 import com.chillrain.chillrainrandomideas.items.ModItems;
+import com.chillrain.chillrainrandomideas.tabs.RandomIdeasTab;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -12,9 +13,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -27,16 +25,19 @@ public class ChillRainRandomIdeas
 
     public static RandomIdeasTab tab = new RandomIdeasTab("randomIdeas");
     public static final String VERSION = "1.1.0";
-    @SidedProxy(clientSide = Constant.CLIENTPROXY, serverSide = References.SERVERPROXYLOCATION)
+//    @SidedProxy(clientSide = Constant.CLIENTPROXY, serverSide = References.SERVERPROXYLOCATION)
+    @SidedProxy(clientSide = Constant.CLIENTPROXY)
     public static ClientProxy proxy;
     public static EventBus EVENT_BUS = MinecraftForge.EVENT_BUS;
     @EventHandler
     public void register(FMLInitializationEvent event) {
        EVENT_BUS.register(this);
        HandlerManager.register(EVENT_BUS);
+
     }
     @EventHandler
     public void preinit(FMLPreInitializationEvent event) {
+        ModItems.preInit();
         proxy.preInit(event);
     }
     @EventHandler
@@ -47,7 +48,9 @@ public class ChillRainRandomIdeas
     }
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+
         proxy.postInit(event);
+        ModItems.postInit();
         tab.postInit();
     }
     

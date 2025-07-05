@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.client.model;
+package com.chillrain.chillrainrandomideas.integration.de.client.model;
 
 import com.brandon3055.draconicevolution.client.handler.ResourceHandler;
 import net.minecraft.client.model.ModelBase;

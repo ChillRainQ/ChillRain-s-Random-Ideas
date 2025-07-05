@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.handler;
+package com.chillrain.chillrainrandomideas.integration.de.client.handler;
 
 import com.google.common.collect.Maps;
 import net.minecraft.util.ResourceLocation;

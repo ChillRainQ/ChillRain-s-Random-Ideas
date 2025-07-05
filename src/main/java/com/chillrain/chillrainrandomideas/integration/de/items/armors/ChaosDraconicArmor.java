@@ -1,29 +1,26 @@
-package com.chillrain.chillrainrandomideas.items.armors;
+package com.chillrain.chillrainrandomideas.integration.de.items.armors;
 
 import com.brandon3055.brandonscore.BrandonsCore;
 import com.brandon3055.brandonscore.common.utills.InfoHelper;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.brandon3055.brandonscore.common.utills.Utills;
-import com.brandon3055.draconicevolution.DraconicEvolution;
 import com.brandon3055.draconicevolution.client.model.ModelDraconicArmorOld;
 import com.brandon3055.draconicevolution.common.entity.EntityPersistentItem;
 import com.brandon3055.draconicevolution.common.items.tools.baseclasses.ToolBase;
 import com.brandon3055.draconicevolution.integration.ModHelper;
-import com.chillrain.chillrainrandomideas.Config;
+import com.chillrain.chillrainrandomideas.integration.de.Config;
 import com.chillrain.chillrainrandomideas.Constant;
-import com.chillrain.chillrainrandomideas.ItemName;
-import com.chillrain.chillrainrandomideas.items.ModItems;
+import com.chillrain.chillrainrandomideas.integration.de.items.DeModItems;
 import com.brandon3055.draconicevolution.common.handler.BalanceConfigHandler;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 import com.brandon3055.draconicevolution.common.utills.IConfigurableItem;
 import com.brandon3055.draconicevolution.common.utills.IInventoryTool;
 import com.brandon3055.draconicevolution.common.utills.IUpgradableItem;
 import com.brandon3055.draconicevolution.common.utills.ItemConfigField;
-import com.chillrain.chillrainrandomideas.client.model.ModelChaoticArmor;
-import com.chillrain.chillrainrandomideas.interfaces.ISpecialShieldArmor;
+import com.chillrain.chillrainrandomideas.integration.de.client.model.ModelChaoticArmor;
+import com.chillrain.chillrainrandomideas.integration.de.interfaces.ISpecialShieldArmor;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -81,11 +78,7 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     public ChaosDraconicArmor(ArmorMaterial material, int armorType, String name) {
         super(material, 0, armorType);
         this.setUnlocalizedName(name);
-        ModItems.registerItem(this, name);
-//        this.setTextureName(name);
-//        this.setUnlocalizedName(name);
-//        this.setCreativeTab(DraconicEvolution.tabToolsWeapons);
-//        GameRegistry.registerItem(this, name);
+//        ModItems.registerItem(this, name);
     }
     @Override
     public boolean isItemTool(ItemStack p_77616_1_) {
@@ -117,18 +110,18 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-        if (stack.getItem() == ModItems.chaosDraconicHelm) return helmIcon;
-        else if (stack.getItem() == ModItems.chaosDraconicChest) return chestIcon;
-        else if (stack.getItem() == ModItems.chaosDraconicLeggs) return leggsIcon;
+        if (stack.getItem() == DeModItems.chaosDraconicHelm) return helmIcon;
+        else if (stack.getItem() == DeModItems.chaosDraconicChest) return chestIcon;
+        else if (stack.getItem() == DeModItems.chaosDraconicLeggs) return leggsIcon;
         else return bootsIcon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconIndex(ItemStack stack) {
-        if (stack.getItem() == ModItems.chaosDraconicHelm) return helmIcon;
-        else if (stack.getItem() == ModItems.chaosDraconicChest) return chestIcon;
-        else if (stack.getItem() == ModItems.chaosDraconicLeggs) return leggsIcon;
+        if (stack.getItem() == DeModItems.chaosDraconicHelm) return helmIcon;
+        else if (stack.getItem() == DeModItems.chaosDraconicChest) return chestIcon;
+        else if (stack.getItem() == DeModItems.chaosDraconicLeggs) return leggsIcon;
         else return bootsIcon;
     }
 
@@ -137,8 +130,8 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         if (!ConfigHandler.useOldArmorModel)
             return Constant.NAMESPACE + "textures/models/armor/armorChaos.png";
-        if (stack.getItem() == ModItems.chaosDraconicHelm || stack.getItem() == ModItems.chaosDraconicChest
-                || stack.getItem() == ModItems.chaosDraconicBoots) {
+        if (stack.getItem() == DeModItems.chaosDraconicHelm || stack.getItem() == DeModItems.chaosDraconicChest
+                || stack.getItem() == DeModItems.chaosDraconicBoots) {
             return Constant.NAMESPACE + "textures/models/armor/chaotic_armor_layer_1.png";
         } else {
             return Constant.NAMESPACE + "textures/models/armor/chaotic_armor_layer_2.png";
@@ -185,7 +178,7 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
         if (stack == null) return;
-        if (stack.getItem() == ModItems.chaosDraconicHelm) {
+        if (stack.getItem() == DeModItems.chaosDraconicHelm) {
             if (world.isRemote) return;
             if (this.getEnergyStored(stack) >= BalanceConfigHandler.draconicArmorEnergyToRemoveEffects
                     && clearNegativeEffects(player)) {

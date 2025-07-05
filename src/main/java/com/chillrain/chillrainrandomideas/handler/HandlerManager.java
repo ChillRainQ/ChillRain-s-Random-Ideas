@@ -1,21 +1,21 @@
 package com.chillrain.chillrainrandomideas.handler;
 
-import com.chillrain.chillrainrandomideas.client.handler.ClientEventHandler;
+import com.chillrain.chillrainrandomideas.integration.ModHelper;
+import com.chillrain.chillrainrandomideas.integration.de.client.handler.ClientEventHandler;
+import com.chillrain.chillrainrandomideas.integration.de.client.handler.ResourceHandler;
+import com.chillrain.chillrainrandomideas.integration.de.handler.DeHandlerManager;
+import com.chillrain.chillrainrandomideas.integration.de.handler.SpecialArmorHandler;
 import cpw.mods.fml.common.eventhandler.EventBus;
 
 /**
  * HandlerManager
- * Handler管理器
- * @author Chill_Rain 2025/06/26
+ *
+ * @author Chill_Rain 2025/07/05
  */
 public class HandlerManager {
-    /**
-     * 注册Handler
-     * @param bus Forge 事件总线
-     */
     public static void register(EventBus bus){
-        bus.register(new SpecialArmorHandler());
-        bus.register(new ClientEventHandler());
-        bus.register(new ResourceHandler());
+        if (ModHelper.isDeInstalled){
+            DeHandlerManager.register(bus);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.client.render;
+package com.chillrain.chillrainrandomideas.integration.de.client.render;
 
 import com.brandon3055.draconicevolution.client.handler.ResourceHandler;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
