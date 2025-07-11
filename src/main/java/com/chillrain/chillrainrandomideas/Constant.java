@@ -1,5 +1,6 @@
 package com.chillrain.chillrainrandomideas;
 
+import cpw.mods.fml.common.Mod;
 import net.minecraft.util.DamageSource;
 
 /**
@@ -9,6 +10,7 @@ import net.minecraft.util.DamageSource;
  */
 public class Constant {
     public static String NAMESPACE = ChillRainRandomIdeas.MODID.toLowerCase() + ":";
+    public static String BOTANIA_NAMESPACE = "Botania".toLowerCase() + ":";
     public static final String DE = "DraconicEvolution";
     public static final String DECLIENTPROXY = "com.chillrain.chillrainrandomideas.integration.de.client.DeClientProxy";
     public static final String CLIENTPROXY = "com.chillrain.chillrainrandomideas.client.ClientProxy";

@@ -29,4 +29,17 @@ public class NBTUtil {
         return verifyExistance(stack, name) ? stack.getTagCompound().getInteger(name) : defaultExpected;
 
     }
+    public static String getNBTString(ItemStack stack, String name, String defaultValue){
+        return verifyExistance(stack, name) ? stack.getTagCompound().getString(name) : defaultValue;
+    }
+    public static <T> ItemStack setNBT(ItemStack stack, String name, T value){
+        NBTTagCompound compound = getCompound(stack);
+        if (value instanceof Integer){
+            compound.setInteger(name, (Integer)value);
+        }else if (value instanceof String){
+            compound.setString(name, (String)value);
+        }
+        stack.setTagCompound(compound);
+        return stack;
+    }
 }

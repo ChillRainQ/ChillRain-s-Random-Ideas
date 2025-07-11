@@ -45,7 +45,7 @@ public class ItemAdminBlade extends ItemSword implements AdvancedTool {
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         ItemStack stack = new ItemStack(this);
-        NBTUtil.setNBTInt(stack, NBTConstant.WEAPON_MODE, 0);
+        NBTUtil.setNBT(stack, NBTConstant.WEAPON_MODE, 0);
         list.add(stack);
     }
 

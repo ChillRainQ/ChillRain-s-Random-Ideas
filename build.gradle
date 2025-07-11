@@ -31,7 +31,7 @@ configFile.withReader {
     prop.load(it)
     project.ext.config = new ConfigSlurper().parse prop
 }
-version = "1.0.0"
+version = "1.1.0"
 group= "com.chillrain.chillrainrandomideas" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ChillRain-Random-Ideas"
 targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
@@ -48,6 +48,7 @@ dependencies {
 //    compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.CCLIB_version}:dev"
 //    compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.ccc_version}:dev"
 //    compile name: 'Draconic-Evolution-1.7.10-dev'
+//    compile 'com.gtnewhorizons:gtnhmixins:1.1.1'
 }
 
 processResources

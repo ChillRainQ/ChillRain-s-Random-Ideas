@@ -14,6 +14,6 @@ public interface AdvancedTool extends AdvancedItem{
         return NBTUtil.getNBTInt(stack, NBTConstant.WEAPON_MODE, 0);
     }
     default void setModeId(ItemStack stack, int mode){
-        NBTUtil.setNBTInt(stack, NBTConstant.WEAPON_MODE, mode);
+        NBTUtil.setNBT(stack, NBTConstant.WEAPON_MODE, mode);
     }
 }
