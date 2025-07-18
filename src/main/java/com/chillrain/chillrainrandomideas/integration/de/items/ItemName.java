@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.integration.de;
+package com.chillrain.chillrainrandomideas.integration.de.items;
 
 /**
  * ItemName

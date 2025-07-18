@@ -1,7 +1,8 @@
-item.draconicchaoticaddon:chaosDraconicHelm.name=Chaos Draconic Helmet
-item.draconicchaoticaddon:chaosDraconicChest.name=Chaos Draconic Chest
-item.draconicchaoticaddon:chaosDraconicLeggs.name=Chaos Draconic Leggs
-item.draconicchaoticaddon:chaosDraconicBoots.name=Chaos Draconic Boots
-item.chillrainrandomideas:adminBlade.name=Admin Blade
-item.chillrainrandomideas:masterManaRing.name=Master Mana Ring
+item.chillrainrandomideas:adminBlade.name=§6Admin Blade
 itemGroup.randomIdeas =ChillRain's Random Ideas
+tooltips.adminBlade.mode0.txt=§bSweep
+tooltips.adminBlade.mode1.txt=§cHeavy Slash
+tooltips.adminBlade.mode2.txt=§4Thrust
+tooltips.desc.adminBlade.mode0.txt=§7Deals AOE damage to nearby enemies
+tooltips.desc.adminBlade.mode1.txt=§7Deals 25%% of target's max health as damage
+tooltips.desc.adminBlade.mode2.txt=§7Deals flat 100 damage, bypassing armor

@@ -1,17 +1,13 @@
 package com.chillrain.chillrainrandomideas.items;
 
-import com.chillrain.chillrainrandomideas.ItemName;
 import com.chillrain.chillrainrandomideas.integration.ModHelper;
 import com.chillrain.chillrainrandomideas.integration.botany.items.BotanyModItem;
 import com.chillrain.chillrainrandomideas.integration.de.items.DeModItems;
-import com.chillrain.chillrainrandomideas.integration.de.items.armors.ChaosDraconicArmor;
 import com.chillrain.chillrainrandomideas.interfaces.IModItems;
 import com.chillrain.chillrainrandomideas.items.weapons.ItemAdminBlade;
 import com.google.common.collect.Lists;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.util.EnumHelper;
 

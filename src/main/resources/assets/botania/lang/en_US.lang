@@ -1,1 +1,4 @@
 item.botania:masterManaRing.name=Master Mana Ring
+item.botania:gemOfConquest.name=Gem Of Conquest
+tooltips.key.ctrl.show.txt=§7Press §eCTRL §7show more message
+tooltips.gemOfConquest.ctrl.show.txt=§aCounterattacks attackers while holding a sword

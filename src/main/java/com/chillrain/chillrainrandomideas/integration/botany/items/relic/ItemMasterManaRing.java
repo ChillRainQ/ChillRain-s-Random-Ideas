@@ -3,7 +3,7 @@ package com.chillrain.chillrainrandomideas.integration.botany.items.relic;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.chillrain.chillrainrandomideas.Constant;
-import com.chillrain.chillrainrandomideas.integration.botany.ItemName;
+import com.chillrain.chillrainrandomideas.integration.botany.items.ItemName;
 import com.chillrain.chillrainrandomideas.integration.botany.NBTConstant;
 import com.chillrain.chillrainrandomideas.utils.NBTUtil;
 import cpw.mods.fml.relauncher.Side;
@@ -11,23 +11,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import vazkii.botania.api.item.IRelic;
 import vazkii.botania.api.mana.IManaItem;
 import vazkii.botania.api.mana.IManaTooltipDisplay;
 import vazkii.botania.common.achievement.ModAchievements;
 import vazkii.botania.common.item.relic.ItemRelic;
-//import com.chillrain.chillrainrandomideas.integration.botany.items.ItemRelic;
-
-import javax.swing.*;
-
-import static vazkii.botania.common.item.equipment.bauble.ItemBauble.getLastPlayerHashcode;
-import static vazkii.botania.common.item.equipment.bauble.ItemBauble.setLastPlayerHashcode;
 
 /**
  * ItemMasterManaRing
@@ -36,7 +27,7 @@ import static vazkii.botania.common.item.equipment.bauble.ItemBauble.setLastPlay
  */
 public class ItemMasterManaRing extends ItemRelic implements IBauble, IManaItem, IManaTooltipDisplay{
     private static final int MAX_MANA = Integer.MAX_VALUE;
-    private Achievement achievement;
+//    private Achievement achievement;
     private static IIcon icon;
 
     public ItemMasterManaRing() {
@@ -109,25 +100,6 @@ public class ItemMasterManaRing extends ItemRelic implements IBauble, IManaItem,
         return false;
     }
 
-    @Override
-    public void bindToUsername(String username, ItemStack stack) {
-        NBTUtil.setNBT(stack, NBTConstant.SOUL_BIND, username);
-    }
-
-    @Override
-    public String getSoulbindUsername(ItemStack itemStack) {
-        return NBTUtil.getNBTString(itemStack, NBTConstant.SOUL_BIND, "");
-    }
-
-    @Override
-    public void setBindAchievement(Achievement achievement) {
-        this.achievement = achievement;
-    }
-
-    @Override
-    public Achievement getBindAchievement() {
-        return this.achievement;
-    }
 
     @Override
     public float getManaFractionForDisplay(ItemStack stack) {
@@ -141,6 +113,13 @@ public class ItemMasterManaRing extends ItemRelic implements IBauble, IManaItem,
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
         return BaubleType.RING;
+    }
+
+    public static void setLastPlayerHashcode(ItemStack stack, int hashcode){
+        NBTUtil.setNBT(stack, NBTConstant.PLAYER_HASHCODE, hashcode);
+    }
+    public int getLastPlayerHashcode(ItemStack stack){
+        return NBTUtil.getNBTInt(stack, NBTConstant.PLAYER_HASHCODE, 0);
     }
 
     @Override

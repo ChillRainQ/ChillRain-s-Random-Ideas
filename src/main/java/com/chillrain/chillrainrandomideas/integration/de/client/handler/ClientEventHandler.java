@@ -4,6 +4,8 @@ import com.brandon3055.draconicevolution.client.handler.ResourceHandler;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 import com.chillrain.chillrainrandomideas.integration.de.items.armors.ChaosDraconicArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemArmor;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -15,6 +17,7 @@ import net.minecraftforge.client.model.IModelCustom;
  *
  * @author Chill_Rain 2025/07/01
  */
+@SideOnly(Side.CLIENT)
 public class ClientEventHandler {
     private static IModelCustom shieldSphere;
     public ClientEventHandler() {

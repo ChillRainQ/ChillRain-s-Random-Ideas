@@ -1,5 +1,6 @@
 package com.chillrain.chillrainrandomideas.integration.de.client.handler;
 
+import com.chillrain.chillrainrandomideas.Constant;
 import com.google.common.collect.Maps;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,7 +15,7 @@ public class ResourceHandler extends com.brandon3055.draconicevolution.client.ha
     private static final Map<String, ResourceLocation> cachedResources = Maps.newHashMap();
     public static ResourceLocation getResource(String rs) {
         if (!cachedResources.containsKey(rs)) {
-            cachedResources.put(rs, new ResourceLocation("chillrainrandomideas:" + rs));
+            cachedResources.put(rs, new ResourceLocation(Constant.DRACONICEVOLUTION_NAMESPACE + rs));
         }
 
         return (ResourceLocation)cachedResources.get(rs);

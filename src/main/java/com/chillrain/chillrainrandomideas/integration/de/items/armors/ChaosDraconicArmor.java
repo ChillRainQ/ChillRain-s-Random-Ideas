@@ -91,7 +91,7 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     }
     @Override
     public String getUnlocalizedName() {
-        return String.format("item.%s%s", Constant.NAMESPACE,
+        return String.format("item.%s%s", Constant.DRACONICEVOLUTION_NAMESPACE,
                 super.getUnlocalizedName().substring(super.getUnlocalizedName().indexOf(".") + 1));
     }
     public String getUnlocalizedName(ItemStack itemStack) {
@@ -101,10 +101,10 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        helmIcon = iconRegister.registerIcon(Constant.NAMESPACE + "chaosDraconicHelm");
-        chestIcon = iconRegister.registerIcon(Constant.NAMESPACE + "chaosDraconicChest");
-        leggsIcon = iconRegister.registerIcon(Constant.NAMESPACE + "chaosDraconicLeggs");
-        bootsIcon = iconRegister.registerIcon(Constant.NAMESPACE + "chaosDraconicBoots");
+        helmIcon = iconRegister.registerIcon(Constant.DRACONICEVOLUTION_NAMESPACE + "chaosDraconicHelm");
+        chestIcon = iconRegister.registerIcon(Constant.DRACONICEVOLUTION_NAMESPACE + "chaosDraconicChest");
+        leggsIcon = iconRegister.registerIcon(Constant.DRACONICEVOLUTION_NAMESPACE + "chaosDraconicLeggs");
+        bootsIcon = iconRegister.registerIcon(Constant.DRACONICEVOLUTION_NAMESPACE + "chaosDraconicBoots");
     }
 
     @Override
@@ -129,12 +129,12 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     @SideOnly(Side.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         if (!ConfigHandler.useOldArmorModel)
-            return Constant.NAMESPACE + "textures/models/armor/armorChaos.png";
+            return Constant.DRACONICEVOLUTION_NAMESPACE + "textures/models/armor/armorChaos.png";
         if (stack.getItem() == DeModItems.chaosDraconicHelm || stack.getItem() == DeModItems.chaosDraconicChest
                 || stack.getItem() == DeModItems.chaosDraconicBoots) {
-            return Constant.NAMESPACE + "textures/models/armor/chaotic_armor_layer_1.png";
+            return Constant.DRACONICEVOLUTION_NAMESPACE + "textures/models/armor/chaotic_armor_layer_1.png";
         } else {
-            return Constant.NAMESPACE + "textures/models/armor/chaotic_armor_layer_2.png";
+            return Constant.DRACONICEVOLUTION_NAMESPACE + "textures/models/armor/chaotic_armor_layer_2.png";
         }
     }
 

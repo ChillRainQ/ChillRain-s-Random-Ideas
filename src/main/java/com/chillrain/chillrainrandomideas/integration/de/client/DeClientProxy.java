@@ -9,10 +9,9 @@ import com.brandon3055.draconicevolution.client.render.block.*;
 import com.chillrain.chillrainrandomideas.integration.de.client.render.RenderArmor;
 import com.brandon3055.draconicevolution.common.handler.ConfigHandler;
 import com.brandon3055.draconicevolution.common.lib.References;
-import com.chillrain.chillrainrandomideas.interfaces.ClientProxyInterface;
+import com.chillrain.chillrainrandomideas.interfaces.IClientProxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -27,14 +26,13 @@ import static com.brandon3055.draconicevolution.integration.nei.IMCForNEI.IMCSen
  *
  * @author Chill_Rain 2025/06/27
  */
-public class DeClientProxy implements ClientProxyInterface {
+public class DeClientProxy extends IClientProxy {
     private static final boolean debug = DraconicEvolution.debug;
     public static String downloadLocation;
 
 
     public void preInit(FMLPreInitializationEvent event) {
         if (debug) System.out.println("on Client side");
-//        super.preInit(event);
         ResourceHandler.init(event);
     }
 

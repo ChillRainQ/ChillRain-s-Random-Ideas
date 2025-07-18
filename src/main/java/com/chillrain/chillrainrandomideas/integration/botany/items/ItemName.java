@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.integration.botany;
+package com.chillrain.chillrainrandomideas.integration.botany.items;
 
 /**
  * ItemName
@@ -7,4 +7,5 @@ package com.chillrain.chillrainrandomideas.integration.botany;
  */
 public class ItemName {
     public static final String masterManaRing = "masterManaRing";
+    public static final String gemOfConquest = "gemOfConquest";
 }

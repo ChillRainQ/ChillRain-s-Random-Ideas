@@ -113,7 +113,6 @@ public class SpecialArmorHandler {
     }
     @Optional.Method(modid = Constant.DE)
     private static void allChaos(LivingAttackEvent event, SpecialArmorSummary summery){
-        //todo 混沌套套装效果被攻击时逻辑 1.次数盾（避免高额伤害）
         if (event.isCanceled() || ADMIN_KILL.damageType.equals(event.source.damageType) || summery == null){
             return;
         }
@@ -156,13 +155,6 @@ public class SpecialArmorHandler {
                         sheild += summery.allocation[i];
                         summery.allocation[i] = 0;
                     }
-//                    if (summery.allocation[i] >= 5.0f * time){
-//                        summery.allocation[i] -= 5.0f * time;
-//                        time = 1;
-//                        sheild += 5.0f * time;
-//                    }else {
-//                        time ++;
-//                    }
                     remainingPoints = (int)(remainingPoints + summery.allocation[i]);
                     ItemNBTHelper.setFloat(armorPeace, "ProtectionPoints", summery.allocation[i]);
                     ItemNBTHelper.setFloat(armorPeace, "ShieldEntropy", newEntropy);
@@ -179,7 +171,7 @@ public class SpecialArmorHandler {
 
                 player.worldObj.playSoundEffect(
                         player.posX + 0.5, player.posY + 0.5, player.posZ + 0.5,
-                        Constant.NAMESPACE + "shieldStrike", 0.9F, player.worldObj.rand.nextFloat() * 0.1F + 1.055F
+                        Constant.DRACONICEVOLUTION_NAMESPACE + "specialShieldStrike", 0.9F, player.worldObj.rand.nextFloat() * 0.1F + 1.055F
                 );
             }
             // 剩余的伤害
@@ -240,7 +232,6 @@ public class SpecialArmorHandler {
     @Optional.Method(modid = Constant.DE)
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onPlayerDeath(LivingDeathEvent event){
-//        CustomArmorHandler.onPlayerDeath(event);
         if (!(event.entityLiving instanceof EntityPlayer)) return;
 
         if (event.isCanceled() || ADMIN_KILL.damageType.equals(event.source.damageType)){
@@ -378,19 +369,6 @@ public class SpecialArmorHandler {
                 this.meanRecoveryPoints = totalRecoveryPoints / this.peaces;
                 return this;
             }
-//            CustomArmorHandler.ArmorSummery summery = super.getSummery(player);
-//            int count = 0;
-//            for(int i = 0; i < summery.armorStacks.length; i ++){
-//                ItemStack armorStack = summery.armorStacks[i];
-//                if (armorStack.getItem() instanceof ISpecialShieldArmor){
-//                    count ++;
-//                    hasSpecialArmor = true;
-//                }
-//            }
-//            if (count == 4){
-//                this.allSpecialArmor = true;
-//            }
-//            return this;
         }
         public int[] getCharges(){
             if (this.armorStacks.length > 0){

@@ -8,4 +8,6 @@ package com.chillrain.chillrainrandomideas.integration.botany;
 public class NBTConstant {
     public static String SOUL_BIND = "soulbind";
     public static String MANA = "mana";
+    public static String ENERGY = "energy";
+    public static String PLAYER_HASHCODE = "playerHashcode";
 }

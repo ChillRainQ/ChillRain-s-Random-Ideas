@@ -2,7 +2,7 @@ package com.chillrain.chillrainrandomideas.items.weapons;
 
 import com.brandon3055.draconicevolution.common.items.armor.ICustomArmor;
 import com.chillrain.chillrainrandomideas.Constant;
-import com.chillrain.chillrainrandomideas.ItemName;
+import com.chillrain.chillrainrandomideas.items.ItemName;
 import com.chillrain.chillrainrandomideas.NBTConstant;
 import com.chillrain.chillrainrandomideas.enums.SwordMode;
 import com.chillrain.chillrainrandomideas.interfaces.AdvancedTool;
@@ -21,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 
@@ -38,7 +39,6 @@ public class ItemAdminBlade extends ItemSword implements AdvancedTool {
         super(material);
         this.setUnlocalizedName(Constant.NAMESPACE + ItemName.ItemAdminBlade);
         ModItems.registerItem(this, ItemName.ItemAdminBlade);
-//        this.setTextureName(Constant.NAMESPACE + ItemName.ItemAdminBlade);
     }
 
 
@@ -53,6 +53,27 @@ public class ItemAdminBlade extends ItemSword implements AdvancedTool {
     @SideOnly(Side.CLIENT)
     public IIcon getIconIndex(ItemStack stack) {
         return icons[this.getModeId(stack)];
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer palyer, List list, boolean advanced) {
+        super.addInformation(stack, palyer, list, advanced);
+        int mode = NBTUtil.getNBTInt(stack, NBTConstant.WEAPON_MODE, 0);
+        switch (mode){
+            case 0:
+                list.add(StatCollector.translateToLocal("tooltips.adminBlade.mode0.txt"));
+                list.add(StatCollector.translateToLocal("tooltips.desc.adminBlade.mode0.txt"));
+                break;
+            case 1:
+                list.add(StatCollector.translateToLocal("tooltips.adminBlade.mode1.txt"));
+                list.add(StatCollector.translateToLocal("tooltips.desc.adminBlade.mode1.txt"));
+                break;
+            case 2:
+                list.add(StatCollector.translateToLocal("tooltips.adminBlade.mode2.txt"));
+                list.add(StatCollector.translateToLocal("tooltips.desc.adminBlade.mode2.txt"));
+                break;
+        }
     }
 
     @Override

@@ -1,15 +1,9 @@
 package com.chillrain.chillrainrandomideas.integration.de.items;
 
-import com.chillrain.chillrainrandomideas.integration.de.ItemName;
 import com.chillrain.chillrainrandomideas.integration.de.items.armors.ChaosDraconicArmor;
 import com.chillrain.chillrainrandomideas.interfaces.IModItems;
-import com.google.common.collect.Lists;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.util.EnumHelper;
-
-import java.util.List;
 
 /**
  * ModItems

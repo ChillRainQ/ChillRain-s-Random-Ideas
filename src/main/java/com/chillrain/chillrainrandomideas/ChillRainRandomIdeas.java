@@ -1,8 +1,9 @@
 package com.chillrain.chillrainrandomideas;
 
-import com.chillrain.chillrainrandomideas.client.ClientProxy;
+import com.chillrain.chillrainrandomideas.proxy.ClientProxy;
 import com.chillrain.chillrainrandomideas.handler.HandlerManager;
 import com.chillrain.chillrainrandomideas.items.ModItems;
+import com.chillrain.chillrainrandomideas.proxy.CommonProxy;
 import com.chillrain.chillrainrandomideas.tabs.RandomIdeasTab;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,6 +16,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
 
 @Mod(modid = ChillRainRandomIdeas.MODID, version = ChillRainRandomIdeas.VERSION, dependencies = "required-after:DraconicEvolution")
 public class ChillRainRandomIdeas
@@ -24,10 +28,9 @@ public class ChillRainRandomIdeas
     public static ChillRainRandomIdeas instance;
 
     public static RandomIdeasTab tab = new RandomIdeasTab("randomIdeas");
-    public static final String VERSION = "1.1.0";
-//    @SidedProxy(clientSide = Constant.CLIENTPROXY, serverSide = References.SERVERPROXYLOCATION)
-    @SidedProxy(clientSide = Constant.CLIENTPROXY)
-    public static ClientProxy proxy;
+    public static final String VERSION = "1.1.1";
+    @SidedProxy(clientSide = Constant.CLIENTPROXY, serverSide = Constant.COMMONPROXY)
+    public static CommonProxy proxy;
     public static EventBus EVENT_BUS = MinecraftForge.EVENT_BUS;
     @EventHandler
     public void register(FMLInitializationEvent event) {
@@ -37,6 +40,8 @@ public class ChillRainRandomIdeas
     }
     @EventHandler
     public void preinit(FMLPreInitializationEvent event) {
+        File configFile = event.getSuggestedConfigurationFile();
+        ModConfig.init(new Configuration(configFile));
         ModItems.preInit();
         proxy.preInit(event);
     }

@@ -1,7 +1,8 @@
-item.chillrainrandomideas:chaosDraconicHelm.name=混沌龙头盔
-item.chillrainrandomideas:chaosDraconicChest.name=混沌龙胸甲
-item.chillrainrandomideas:chaosDraconicLeggs.name=混沌龙护腿
-item.chillrainrandomideas:chaosDraconicBoots.name=混沌龙靴子
-item.chillrainrandomideas:adminBlade.name=Admin Blade
-item.chillrainrandomideas:masterManaRing.name=大师魔力戒指
+item.chillrainrandomideas:adminBlade.name=§6ChillRain的剑
 itemGroup.randomIdeas=ChillRain随想
+tooltips.adminBlade.mode0.txt=§b群杀
+tooltips.adminBlade.mode1.txt=§c重斩
+tooltips.adminBlade.mode2.txt=§4穿刺
+tooltips.desc.adminBlade.mode0.txt=§7对周围敌人造成范围伤害
+tooltips.desc.adminBlade.mode1.txt=§7造成目标最大生命的25%%伤害
+tooltips.desc.adminBlade.mode2.txt=§7造成100点伤害，无视护甲

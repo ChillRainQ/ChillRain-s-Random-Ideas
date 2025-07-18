@@ -1,7 +1,6 @@
 package com.chillrain.chillrainrandomideas.enums;
 
 
-import com.chillrain.chillrainrandomideas.Constant;
 import com.chillrain.chillrainrandomideas.interfaces.AdvancedTool;
 import com.chillrain.chillrainrandomideas.utils.WeaponUtil;
 import net.minecraft.entity.Entity;
@@ -15,8 +14,8 @@ public enum SwordMode {
     DEFAULT_MODE("adminBlade0", 0),
     PERCENT_MODE("adminBlade1", 1),
     HEIGHT_MODE("adminBlade2", 2);
-    private String textKey;
-    private int modeId;
+    private final String textKey;
+    private final int modeId;
 
     SwordMode(String textKey, int id) {
         this.textKey = textKey;
@@ -48,7 +47,7 @@ public enum SwordMode {
         }
         EntityLivingBase live = (EntityLivingBase) target;
         float damage = 0f;
-        float health = live.getHealth();
+        live.getHealth();
         float percent = 0.0f;
         switch (this.getModeId()){
             case 1:
@@ -58,12 +57,12 @@ public enum SwordMode {
                 damage = 100f;
                 break;
             case 0:
-                WeaponUtil.AOEAttack((EntityPlayer) attacker, target, 2, 5f);
+                WeaponUtil.AOEAttack(attacker, target, 2, 5f);
                 return;
             default:
                 break;
         }
         damage += percent * live.getMaxHealth();
-        target.attackEntityFrom(new DamageSource(""), damage);
+        target.attackEntityFrom(new DamageSource("").setDamageBypassesArmor(), damage);
     }
 }

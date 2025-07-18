@@ -1,9 +1,9 @@
 {
-  "shieldStrike": {
+  "specialShieldStrike": {
     "category": "player",
     "sounds": [
       {
-        "name": "shieldStrike",
+        "name": "specialShieldStrike",
         "stream": false
       }
     ]

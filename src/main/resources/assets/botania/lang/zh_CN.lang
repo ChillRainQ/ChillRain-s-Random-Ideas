@@ -1,1 +1,4 @@
 item.botania:masterManaRing.name=大师魔力戒指
+item.botania:gemOfConquest.name=征服宝石
+tooltips.key.ctrl.show.txt=§7按§eCTRL§7查看更多信息
+tooltips.gemOfConquest.ctrl.show.txt=§a手持剑时对攻击者自动反击
