@@ -1,5 +1,6 @@
 package com.chillrain.chillrainrandomideas.tabs;
 
+import com.chillrain.chillrainrandomideas.blocks.ModBlocks;
 import com.chillrain.chillrainrandomideas.items.ModItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,5 +31,6 @@ public class RandomIdeasTab extends CreativeTabs {
 
     public void postInit() {
         ModItems.items.forEach(item -> item.setCreativeTab(this));
+        ModBlocks.blocks.forEach(block -> block.setCreativeTab(this));
     }
 }

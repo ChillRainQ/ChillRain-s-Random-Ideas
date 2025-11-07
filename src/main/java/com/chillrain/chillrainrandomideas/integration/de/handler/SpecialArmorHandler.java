@@ -1,14 +1,18 @@
 package com.chillrain.chillrainrandomideas.integration.de.handler;
 
+import baubles.api.BaublesApi;
 import cofh.api.energy.IEnergyContainerItem;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.brandon3055.draconicevolution.DraconicEvolution;
+import com.brandon3055.draconicevolution.common.ModItems;
 import com.brandon3055.draconicevolution.common.handler.BalanceConfigHandler;
 import com.brandon3055.draconicevolution.common.items.armor.CustomArmorHandler;
 import com.brandon3055.draconicevolution.common.items.armor.DraconicArmor;
+import com.brandon3055.draconicevolution.common.items.tools.DraconiumFluxCapacitor;
 import com.brandon3055.draconicevolution.common.network.ShieldHitPacket;
 import com.brandon3055.draconicevolution.common.utills.IUpgradableItem;
 import com.brandon3055.draconicevolution.integration.ModHelper;
+import com.chillrain.chillrainrandomideas.ModConfig;
 import com.chillrain.chillrainrandomideas.integration.de.Config;
 import com.chillrain.chillrainrandomideas.Constant;
 import com.chillrain.chillrainrandomideas.integration.de.interfaces.ISpecialShieldArmor;
@@ -17,6 +21,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -226,6 +231,27 @@ public class SpecialArmorHandler {
     }
 
     /**
+     *  获取第一个满足电量条件的电容
+     * @param attackedPlayer
+     * @param energy
+     * @return
+     */
+    private static ItemStack getCapacitor(EntityPlayer attackedPlayer, int energy){
+        Item targetItem = ModItems.createFluxCapacitor.getItem();
+        if (!ModConfig.openChaoticArrmorCapacitorFirst) return null;
+        for (ItemStack stack : attackedPlayer.inventory.mainInventory) {
+            if (stack != null && stack.getItem().getClass() == targetItem.getClass()) {
+                DraconiumFluxCapacitor capacitor = (DraconiumFluxCapacitor) stack.getItem();
+                boolean enough = capacitor.getEnergyStored(stack) >= energy;
+                if (enough){
+                    return stack;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      *  玩家死亡时事件响应
      * @param event
      */
@@ -249,11 +275,14 @@ public class SpecialArmorHandler {
             }
             // 扣除电量
             for (int i = 0; i < summery.armorStacks.length; ++i) {
-                if (summery.armorStacks[i] != null) {
+                int energy = (int) ((double) charges[i] / (double) totalCharge * (double) BalanceConfigHandler.draconicArmorBaseStorage);
+                ItemStack capacitor = getCapacitor(player,energy);
+                if (capacitor != null) {
+                    DraconiumFluxCapacitor capacitorItem = (DraconiumFluxCapacitor) capacitor.getItem();
+                    capacitorItem.extractEnergy(summery.armorStacks[i], energy, false);
+                }else if (summery.armorStacks[i] != null) {
                     ((IEnergyContainerItem)summery.armorStacks[i].getItem()).extractEnergy(
-                            summery.armorStacks[i],
-                            (int)((double)charges[i] / (double)totalCharge * (double)BalanceConfigHandler.draconicArmorBaseStorage),
-                            false);
+                            summery.armorStacks[i], energy, false);
                 }
             }
             player.addChatComponentMessage(

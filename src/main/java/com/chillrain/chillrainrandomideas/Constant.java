@@ -12,8 +12,6 @@ public class Constant {
     public static String BOTANIA_NAMESPACE = "Botania".toLowerCase() + ":";
     public static String DRACONICEVOLUTION_NAMESPACE = "DraconicEvolution".toLowerCase() + ":";
     public static final String DE = "DraconicEvolution";
-    public static final String DECLIENTPROXY = "com.chillrain.chillrainrandomideas.integration.de.client.DeClientProxy";
-    public static final String DESERVERPROXY = "com.chillrain.chillrainrandomideas.integration.de.client.DeServerProxy";
     public static final String CLIENTPROXY = "com.chillrain.chillrainrandomideas.proxy.ClientProxy";
     public static final String COMMONPROXY = "com.chillrain.chillrainrandomideas.proxy.CommonProxy";
     public static final DamageSource ADMIN_KILL = (new DamageSource("administrative.kill")).setDamageAllowedInCreativeMode().setDamageBypassesArmor().setDamageIsAbsolute();

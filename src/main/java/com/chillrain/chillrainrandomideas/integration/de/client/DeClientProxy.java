@@ -28,7 +28,7 @@ import static com.brandon3055.draconicevolution.integration.nei.IMCForNEI.IMCSen
  */
 public class DeClientProxy extends IClientProxy {
     private static final boolean debug = DraconicEvolution.debug;
-    public static String downloadLocation;
+
 
 
     public void preInit(FMLPreInitializationEvent event) {

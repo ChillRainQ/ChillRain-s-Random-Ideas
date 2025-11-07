@@ -2,6 +2,7 @@ package com.chillrain.chillrainrandomideas.integration.botany.items.relic;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.chillrain.chillrainrandomideas.Constant;
 import com.chillrain.chillrainrandomideas.integration.botany.items.ItemName;
 import com.chillrain.chillrainrandomideas.integration.botany.NBTConstant;
@@ -9,16 +10,22 @@ import com.chillrain.chillrainrandomideas.utils.NBTUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
 import vazkii.botania.api.mana.IManaItem;
 import vazkii.botania.api.mana.IManaTooltipDisplay;
 import vazkii.botania.common.achievement.ModAchievements;
 import vazkii.botania.common.item.relic.ItemRelic;
+
+import java.util.List;
 
 /**
  * ItemMasterManaRing
@@ -36,7 +43,46 @@ public class ItemMasterManaRing extends ItemRelic implements IBauble, IManaItem,
     public int getDamage(ItemStack stack) {
         float mana = (float)this.getMana(stack);
         return 1000 - (int)(mana / (float)this.getMaxMana(stack) * 1000.0F);
+    }@Override
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        // 普通版
+        ItemStack normal = new ItemStack(item);
+        list.add(normal);
+        // 满魔力版
+        ItemStack full = new ItemStack(item);
+        ItemMasterManaRing fullRing = (ItemMasterManaRing) full.getItem();
+        fullRing.addMana(full, Integer.MAX_VALUE);
+        list.add(full);
     }
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        // 当 mana 未满时才显示条
+        return getMana(stack) < getMaxMana(stack);
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        // Minecraft 的逻辑：0 = 满条，1 = 空条
+        double mana = getMana(stack);
+        double max = getMaxMana(stack);
+        return 1.0D - mana / max;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getRGBDurabilityForDisplay(ItemStack stack) {
+        // 蓝色魔力条
+        return 0x33CCFF;
+    }
+
+
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
+        super.addInformation(stack, player, list, advanced);
+        int mana = getMana(stack);
+        list.add("Mana: " + mana + "/" + Integer.MAX_VALUE);
+    }
+
     public int getDisplayDamage(ItemStack stack) {
         return this.getDamage(stack);
     }
@@ -104,10 +150,6 @@ public class ItemMasterManaRing extends ItemRelic implements IBauble, IManaItem,
     @Override
     public float getManaFractionForDisplay(ItemStack stack) {
         return (float)this.getMana(stack) / (float)this.getMaxMana(stack);
-    }
-    @Override
-    public boolean showDurabilityBar(ItemStack stack) {
-        return true; // 总是显示，或者 mana < maxMana 时显示
     }
 
     @Override

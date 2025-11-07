@@ -1,4 +1,4 @@
-package com.chillrain.chillrainrandomideas.integration.botany;
+package com.chillrain.chillrainrandomideas.integration.botany.blocks;
 
 /**
  * BlockName

@@ -29,12 +29,10 @@ public class GemOfConquestHandler {
         if (baubles == null) {
             return;
         }
-//        boolean hasGem = false;
         ItemStack gem = null;
         for (int i = 0; i < baubles.getSizeInventory(); i ++){
             ItemStack stack = baubles.getStackInSlot(i);
             if (stack != null && stack.getItem() instanceof ItemGemOfConquest){
-//                hasGem = true;
                 gem = stack;
                 break;
             }

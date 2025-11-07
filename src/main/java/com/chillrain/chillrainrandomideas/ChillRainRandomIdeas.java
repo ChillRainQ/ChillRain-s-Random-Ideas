@@ -1,5 +1,8 @@
 package com.chillrain.chillrainrandomideas;
 
+import com.chillrain.chillrainrandomideas.blocks.ModBlocks;
+import com.chillrain.chillrainrandomideas.blocks.tiles.ModTiles;
+import com.chillrain.chillrainrandomideas.bugfix.containerfix.CRBugFixConfig;
 import com.chillrain.chillrainrandomideas.proxy.ClientProxy;
 import com.chillrain.chillrainrandomideas.handler.HandlerManager;
 import com.chillrain.chillrainrandomideas.items.ModItems;
@@ -42,6 +45,7 @@ public class ChillRainRandomIdeas
     public void preinit(FMLPreInitializationEvent event) {
         File configFile = event.getSuggestedConfigurationFile();
         ModConfig.init(new Configuration(configFile));
+        CRBugFixConfig.init(new Configuration(configFile));
         ModItems.preInit();
         proxy.preInit(event);
     }
@@ -49,6 +53,8 @@ public class ChillRainRandomIdeas
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         ModItems.init();
+//        ModBlocks.init();
+//        ModTiles.init();
         tab.init();
     }
     @EventHandler
@@ -56,6 +62,8 @@ public class ChillRainRandomIdeas
 
         proxy.postInit(event);
         ModItems.postInit();
+//        ModBlocks.postInit();
+//        ModTiles.postInit();
         tab.postInit();
     }
     

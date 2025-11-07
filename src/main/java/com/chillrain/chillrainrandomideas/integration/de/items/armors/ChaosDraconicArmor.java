@@ -236,6 +236,7 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         InfoHelper.addEnergyAndLore(stack, list);
         ToolBase.holdCTRLForUpgrades(list, stack);
+        list.add(EnumChatFormatting.LIGHT_PURPLE + "§l特殊套装效果§r" + EnumChatFormatting.GRAY + "：单次伤害最高损伤8护盾，携带电容器时优先扣除电容器电量！");
         if (Loader.isModLoaded("Thaumcraft")) {
             list.add("");
             list.add(

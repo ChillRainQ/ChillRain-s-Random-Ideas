@@ -2,7 +2,6 @@ package com.chillrain.chillrainrandomideas.integration.botany.blocks;
 
 
 import com.chillrain.chillrainrandomideas.Constant;
-import com.chillrain.chillrainrandomideas.integration.botany.BlockName;
 import com.chillrain.chillrainrandomideas.integration.botany.blocks.tiles.TileElvenAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -32,8 +31,6 @@ import vazkii.botania.client.core.handler.HUDHandler;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.item.ModItems;
 import vazkii.botania.common.lexicon.LexiconData;
-
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class BlockElvenAltar extends Block implements ITileEntityProvider, IWandable, ILexiconable, IWandHUD {
     private static final AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 1, 0.75, 1);

@@ -11,7 +11,8 @@ public class ModConfig {
     public static Configuration config;
     public static boolean openDE;
     public static boolean openBotany;
-    public static boolean openAE;
+    public static boolean openChaoticArrmorCapacitorFirst;
+    public static boolean openBugfix;
 
     public static void init(Configuration config){
         ModConfig.config = config;
@@ -21,7 +22,8 @@ public class ModConfig {
         String categoryGeneral = Configuration.CATEGORY_GENERAL;
         openDE = config.getBoolean("openDE", categoryGeneral, true, "open DE integration");
         openBotany = config.getBoolean("openBotany", categoryGeneral, true, "open Botany integration");
-        openAE = config.getBoolean("openAE", categoryGeneral, true, "open AE2 integration");
+        openChaoticArrmorCapacitorFirst = config.getBoolean("openChaoticArrmorCapacitorFirst", categoryGeneral, true, "Advance func");
+        openBugfix = config.getBoolean("openBugfix", categoryGeneral, false, "fixed some bug");
         if (config.hasChanged()){
             config.save();
         }
