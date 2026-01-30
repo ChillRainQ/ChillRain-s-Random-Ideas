@@ -1,6 +1,5 @@
 package com.chillrain.chillrainrandomideas.integration.de.handler;
 
-import baubles.api.BaublesApi;
 import cofh.api.energy.IEnergyContainerItem;
 import com.brandon3055.brandonscore.common.utills.ItemNBTHelper;
 import com.brandon3055.draconicevolution.DraconicEvolution;
@@ -43,17 +42,75 @@ public class SpecialArmorHandler {
      * @param event
      */
     @Optional.Method(modid = Constant.DE)
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public void onPlayerAttacked(LivingAttackEvent event){
+    @SubscribeEvent(priority = EventPriority.NORMAL)
+    public void onAllChaosArmorPlayerAttacked(LivingAttackEvent event){
         if (!(event.entityLiving instanceof EntityPlayer)) return;
         EntityPlayer player = (EntityPlayer)event.entityLiving;
         SpecialArmorSummary summery = new SpecialArmorSummary().getSummery(player);
-        if (summery != null && summery.allSpecialArmor){
-            allChaos(event, summery);
+        DamageSource source = event.source;
+        if (event.isCanceled() || !summery.allSpecialArmor) {
+            return;
         }
-        else if (summery != null && summery.hasSpecialArmor){
-            hasChaos(event, summery);
+        float hitAmount = ModHelper.applyModDamageAdjustments(summery, event);
+
+        if (applySpecialArmorDamageBlocking(event, summery)) {
+            return;
         }
+        if (summery == null || summery.protectionPoints <= 0 || ADMIN_KILL.damageType.equals(event.source.damageType)) {
+            return;
+        }
+        event.setCanceled(true);
+        if (hitAmount == Float.MAX_VALUE && !ADMIN_KILL.damageType.equals(source.damageType)){
+            float maxHealth = player.getMaxHealth();
+//            player.attackEntityFrom(ADMIN_KILL, );
+            player.setHealth(Math.max(0.0f, player.getHealth() - maxHealth * 0.25f));
+            if (player.getHealth() - maxHealth * 0.25f <= 0.0f){
+                player.attackEntityFrom(ADMIN_KILL, Float.MAX_VALUE);
+            }
+        }
+        if ((float) player.hurtResistantTime > (float) player.maxHurtResistantTime / 2.0F) return;
+
+        float newEntropy = Math.min(summery.entropy + 1 + (hitAmount / 20), 100F);
+
+        // Divide the damage between the armor peaces based on how many of the protection points each peace has
+        float totalAbsorbed = 0;
+        int remainingPoints = 0;
+        for (int i = 0; i < summery.allocation.length; i++) {
+            if (summery.allocation[i] == 0) continue;
+            ItemStack armorPeace = summery.armorStacks[i];
+
+            float dmgShear = summery.allocation[i] / summery.protectionPoints;
+            float dmg = dmgShear * hitAmount;
+
+            float absorbed = Math.min(dmg, summery.allocation[i]);
+            totalAbsorbed += absorbed;
+            summery.allocation[i] -= Math.min(absorbed, Config.timeShieldValue);
+            remainingPoints += summery.allocation[i];
+            ItemNBTHelper.setFloat(armorPeace, "ProtectionPoints", summery.allocation[i]);
+            ItemNBTHelper.setFloat(armorPeace, "ShieldEntropy", newEntropy);
+        }
+
+        if (summery.protectionPoints > 0) {
+            DraconicEvolution.network.sendToAllAround(
+                    new ShieldHitPacket(player, summery.protectionPoints / summery.maxProtectionPoints),
+                    new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 64));
+            player.worldObj.playSoundEffect(
+                    player.posX + 0.5, player.posY + 0.5, player.posZ + 0.5,
+                    Constant.DRACONICEVOLUTION_NAMESPACE + "specialShieldStrike", 0.9F, player.worldObj.rand.nextFloat() * 0.1F + 1.055F
+            );
+        }
+
+        if (remainingPoints > 0) {
+            player.hurtResistantTime = 20;
+        } else if (hitAmount - totalAbsorbed > 0) {
+            player.attackEntityFrom(event.source, hitAmount - totalAbsorbed);
+        }
+//        if (summery != null && summery.allSpecialArmor){
+//            allChaos(event, summery);
+//        }
+//        else if (summery != null && summery.hasSpecialArmor){
+//            hasChaos(event, summery);
+//        }
 
     }
     @Optional.Method(modid = Constant.DE)
@@ -237,7 +294,7 @@ public class SpecialArmorHandler {
      * @return
      */
     private static ItemStack getCapacitor(EntityPlayer attackedPlayer, int energy){
-        Item targetItem = ModItems.createFluxCapacitor.getItem();
+        Item targetItem = ModItems.draconicFluxCapacitor.getItem();
         if (!ModConfig.openChaoticArrmorCapacitorFirst) return null;
         for (ItemStack stack : attackedPlayer.inventory.mainInventory) {
             if (stack != null && stack.getItem().getClass() == targetItem.getClass()) {

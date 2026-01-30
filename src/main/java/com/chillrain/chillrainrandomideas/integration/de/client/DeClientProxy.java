@@ -19,7 +19,6 @@ import com.chillrain.chillrainrandomideas.integration.de.items.DeModItems;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
-import static com.brandon3055.draconicevolution.integration.nei.IMCForNEI.IMCSender;
 
 /**
  * ClientProxy
@@ -44,7 +43,7 @@ public class DeClientProxy extends IClientProxy {
         registerRenderIDs();
         registerRendering();
         ResourceHandler.instance.tick(null);
-        IMCSender();
+//        IMCSender();
     }
     public void registerRendering() {
         if (!ConfigHandler.useOldArmorModel) {
