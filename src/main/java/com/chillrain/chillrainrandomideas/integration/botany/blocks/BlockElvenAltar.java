@@ -2,20 +2,22 @@ package com.chillrain.chillrainrandomideas.integration.botany.blocks;
 
 
 import com.chillrain.chillrainrandomideas.Constant;
+import com.chillrain.chillrainrandomideas.integration.botany.blocks.containers.CRBlockModContainer;
 import com.chillrain.chillrainrandomideas.integration.botany.blocks.tiles.TileElvenAltar;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -28,21 +30,42 @@ import vazkii.botania.api.wand.IWandHUD;
 import vazkii.botania.api.wand.IWandable;
 import com.chillrain.chillrainrandomideas.integration.botany.helper.InventoryHelper;
 import vazkii.botania.client.core.handler.HUDHandler;
+import vazkii.botania.client.core.helper.IconHelper;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.item.ModItems;
 import vazkii.botania.common.lexicon.LexiconData;
 
-public class BlockElvenAltar extends Block implements ITileEntityProvider, IWandable, ILexiconable, IWandHUD {
+import java.util.Random;
+
+public class BlockElvenAltar extends CRBlockModContainer implements IWandable, ILexiconable, IWandHUD {
     private static final AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 1, 0.75, 1);
+
+    private IIcon[] icons;
+    private Random random;
 
     public BlockElvenAltar() {
         super(Material.rock);
-        setBlockName("elvenAlter");
-        setBlockTextureName(Constant.NAMESPACE + BlockName.ElvenAlter);
+        setBlockName("elvenAltar");
+        setBlockTextureName(Constant.BOTANIA_NAMESPACE + BlockName.ElvenAlter);
         setHardness(2.0F);
         setResistance(10.0F);
+        setBlockBounds(0F, 0F, 0F, 1F, 0.75F, 1F);
         setStepSound(soundTypeStone);
         BotaniaAPI.blacklistBlockFromMagnet(this, Short.MAX_VALUE);
+        random = new Random();
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        icons = new IIcon[3]; // 创建数组存放三个贴图
+        for (int i = 0; i < icons.length; i++) {
+            icons[i] = IconHelper.forBlock(par1IconRegister, this, i);
+        }
+    }
+
+    @Override
+    public IIcon getIcon(int par1, int par2) {
+        return icons[Math.min(2, par1)];
     }
 
     @Override
@@ -55,10 +78,8 @@ public class BlockElvenAltar extends Block implements ITileEntityProvider, IWand
                                     float hitX, float hitY, float hitZ) {
         if (world.isRemote)
             return true;
-
         TileElvenAltar altar = (TileElvenAltar) world.getTileEntity(x, y, z);
         ItemStack stack = player.getCurrentEquippedItem();
-
         if (player.isSneaking()) {
             if (altar.manaToGet == 0) {
                 InventoryHelper.withdrawFromInventory(altar, player);
@@ -74,9 +95,9 @@ public class BlockElvenAltar extends Block implements ITileEntityProvider, IWand
             VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, x, y, z);
             return result;
         }
-
         return false;
     }
+
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
@@ -96,15 +117,15 @@ public class BlockElvenAltar extends Block implements ITileEntityProvider, IWand
         return false;
     }
 
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        return AABB;
-    }
-
-    @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-        return AABB;
-    }
+//    @Override
+//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+//        return AABB;
+//    }
+//
+//    @Override
+//    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+//        return AABB;
+//    }
 
     @Override
     public boolean hasComparatorInputOverride() {
@@ -126,14 +147,16 @@ public class BlockElvenAltar extends Block implements ITileEntityProvider, IWand
 
     @Override
     public LexiconEntry getEntry(World world, int i, int i1, int i2, EntityPlayer entityPlayer, ItemStack itemStack) {
-        return LexiconData.apothecary;
+        return LexiconData.runicAltar;
     }
 
 
     @Override
-    public boolean onUsedByWand(EntityPlayer entityPlayer, ItemStack itemStack, World world, int i, int i1, int i2, int i3) {
+    public boolean onUsedByWand(EntityPlayer entityPlayer, ItemStack itemStack, World world, int x, int y, int z, int side) {
+        ((TileElvenAltar) world.getTileEntity(x, y, z)).onWanded(entityPlayer, itemStack);
         return true;
     }
+
 
     @Override
     public void renderHUD(Minecraft mc, ScaledResolution res, World world, int x, int y, int z) {
@@ -229,10 +252,10 @@ public class BlockElvenAltar extends Block implements ITileEntityProvider, IWand
         float f1 = 1.0F / p_146110_8_;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(p_146110_1_), (double)(p_146110_2_ + p_146110_6_), 0.0D, (double)((float)(p_146110_3_) * f), (double)((float)(p_146110_4_ + p_146110_6_) * f1));
-        tessellator.addVertexWithUV((double)(p_146110_1_ + p_146110_5_), (double)(p_146110_2_ + p_146110_6_), 0.0D, (double)((float)(p_146110_3_ + p_146110_5_) * f), (double)((float)(p_146110_4_ + p_146110_6_) * f1));
-        tessellator.addVertexWithUV((double)(p_146110_1_ + p_146110_5_), (double)(p_146110_2_), 0.0D, (double)((float)(p_146110_3_ + p_146110_5_) * f), (double)((float)(p_146110_4_) * f1));
-        tessellator.addVertexWithUV((double)(p_146110_1_), (double)(p_146110_2_), 0.0D, (double)((float)(p_146110_3_) * f), (double)((float)(p_146110_4_) * f1));
+        tessellator.addVertexWithUV((double) (p_146110_1_), (double) (p_146110_2_ + p_146110_6_), 0.0D, (double) ((float) (p_146110_3_) * f), (double) ((float) (p_146110_4_ + p_146110_6_) * f1));
+        tessellator.addVertexWithUV((double) (p_146110_1_ + p_146110_5_), (double) (p_146110_2_ + p_146110_6_), 0.0D, (double) ((float) (p_146110_3_ + p_146110_5_) * f), (double) ((float) (p_146110_4_ + p_146110_6_) * f1));
+        tessellator.addVertexWithUV((double) (p_146110_1_ + p_146110_5_), (double) (p_146110_2_), 0.0D, (double) ((float) (p_146110_3_ + p_146110_5_) * f), (double) ((float) (p_146110_4_) * f1));
+        tessellator.addVertexWithUV((double) (p_146110_1_), (double) (p_146110_2_), 0.0D, (double) ((float) (p_146110_3_) * f), (double) ((float) (p_146110_4_) * f1));
         tessellator.draw();
     }
 

@@ -13,20 +13,16 @@ public class TileElvenAltar extends TileRuneAltar implements ISparkAttachable {
     private ISparkEntity attachedSpark;
     public int mana = 0;
     public int recipeKeepTicks = 0;
-    @Override
-    public void func_145845_h() {
-        super.func_145845_h(); // 调用父类 tick 方法，处理物品与魔力
-        // 可以在这里加一些自定义特效或逻辑
-    }
+
     @Override
     public boolean addItem(EntityPlayer player, ItemStack stack) {
         // 调用父类逻辑
-        boolean result = super.addItem(player, stack);
-        if (result) {
-            // 更新配方状态
-            updateRecipe();
-        }
-        return result;
+//        boolean result = super.addItem(player, stack);
+//        if (result) {
+//            // 更新配方状态
+//            updateRecipe();
+//        }
+        return super.addItem(player, stack);
     }
 
     @Override
@@ -144,9 +140,21 @@ public class TileElvenAltar extends TileRuneAltar implements ISparkAttachable {
     public ISparkEntity getAttachedSpark() {
         return attachedSpark;
     }
+    ///
+    @Override
+    public boolean canRecieveManaFromBursts() {
+        // 如果魔力还没满且有配方，则允许接收魔力（包括发射器和火花）
+        return manaToGet > 0 && mana < manaToGet;
+    }
+    @Override
+    public synchronized void recieveMana(int mana) {
+        // 确保存储到父类的 mana 变量中
+        this.mana = Math.min(this.mana + mana, manaToGet);
+        this.markDirty(); // 记得标记 NBT 改变
+    }
 
     @Override
     public boolean areIncomingTranfersDone() {
-        return !canRecieveManaFromBursts();
+        return mana >= manaToGet;
     }
 }

@@ -53,8 +53,8 @@ public class ChillRainRandomIdeas
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         ModItems.init();
-//        ModBlocks.init();
-//        ModTiles.init();
+        ModBlocks.init();
+        ModTiles.init();
         tab.init();
     }
     @EventHandler
@@ -62,8 +62,8 @@ public class ChillRainRandomIdeas
 
         proxy.postInit(event);
         ModItems.postInit();
-//        ModBlocks.postInit();
-//        ModTiles.postInit();
+        ModBlocks.postInit();
+        ModTiles.postInit();
         tab.postInit();
     }
     

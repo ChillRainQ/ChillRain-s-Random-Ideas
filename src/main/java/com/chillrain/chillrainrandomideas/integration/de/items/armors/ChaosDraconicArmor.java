@@ -206,11 +206,6 @@ public class ChaosDraconicArmor extends ItemArmor implements ISpecialArmor,
 
                 if (player.isBurning()) {
                     player.extinguish();
-                    /*
-                     * Wyvern Armor doesn't require energy to extinguish player => Draconic Armor shouldn't require. See
-                     * CustomArmorHandler.applyArmorDamageBlocking
-                     */
-                    // flag = false;
                 }
                 for (PotionEffect potion : potions) {
                     int id = potion.getPotionID();
