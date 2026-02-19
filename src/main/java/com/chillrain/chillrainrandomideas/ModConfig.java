@@ -23,7 +23,6 @@ public class ModConfig {
         openDE = config.getBoolean("openDE", categoryGeneral, true, "open DE integration");
         openBotany = config.getBoolean("openBotany", categoryGeneral, true, "open Botany integration");
         openChaoticArrmorCapacitorFirst = config.getBoolean("openChaoticArrmorCapacitorFirst", categoryGeneral, true, "Advance func");
-        openBugfix = config.getBoolean("openBugfix", categoryGeneral, false, "fixed some bug");
         if (config.hasChanged()){
             config.save();
         }

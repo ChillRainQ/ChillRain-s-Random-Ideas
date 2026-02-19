@@ -48,15 +48,14 @@ public class SpecialArmorHandler {
         EntityPlayer player = (EntityPlayer)event.entityLiving;
         SpecialArmorSummary summery = new SpecialArmorSummary().getSummery(player);
         DamageSource source = event.source;
-        if (event.isCanceled() || !summery.allSpecialArmor) {
+        if (event.isCanceled() || ADMIN_KILL.damageType.equals(event.source.damageType) || summery == null || !summery.allSpecialArmor){
             return;
         }
         float hitAmount = ModHelper.applyModDamageAdjustments(summery, event);
-
         if (applySpecialArmorDamageBlocking(event, summery)) {
             return;
         }
-        if (summery == null || summery.protectionPoints <= 0 || ADMIN_KILL.damageType.equals(event.source.damageType)) {
+        if (summery.protectionPoints <= 0 || ADMIN_KILL.damageType.equals(event.source.damageType)) {
             return;
         }
         event.setCanceled(true);
@@ -115,6 +114,7 @@ public class SpecialArmorHandler {
     }
     @Optional.Method(modid = Constant.DE)
     private static void hasChaos(LivingAttackEvent event, SpecialArmorSummary summery){
+
         if (event.isCanceled()) {
             return;
         }
