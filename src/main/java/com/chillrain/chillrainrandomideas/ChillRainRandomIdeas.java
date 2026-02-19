@@ -29,7 +29,7 @@ public class ChillRainRandomIdeas
     public static ChillRainRandomIdeas instance;
 
     public static RandomIdeasTab tab = new RandomIdeasTab("randomIdeas");
-    public static final String VERSION = "1.1.1";
+    public static final String VERSION = "1.3.0";
     @SidedProxy(clientSide = Constant.CLIENTPROXY, serverSide = Constant.COMMONPROXY)
     public static CommonProxy proxy;
     public static EventBus EVENT_BUS = MinecraftForge.EVENT_BUS;

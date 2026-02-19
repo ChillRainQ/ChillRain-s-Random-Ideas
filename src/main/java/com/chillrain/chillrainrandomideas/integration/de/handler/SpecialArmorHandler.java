@@ -48,6 +48,7 @@ public class SpecialArmorHandler {
         EntityPlayer player = (EntityPlayer)event.entityLiving;
         SpecialArmorSummary summery = new SpecialArmorSummary().getSummery(player);
         DamageSource source = event.source;
+        // 当事件取消，伤害类型为管理员伤害，或者未穿戴盔甲时返回
         if (event.isCanceled() || ADMIN_KILL.damageType.equals(event.source.damageType) || summery == null || !summery.allSpecialArmor){
             return;
         }
@@ -403,12 +404,12 @@ public class SpecialArmorHandler {
             this.armorStacks = new ItemStack[armorSlots.length];
             this.pointsDown = new float[armorSlots.length];
             this.energyAllocation = new int[armorSlots.length];
-            int count = 0;
+//            int count = 0;
             for(int i = 0; i < armorSlots.length; ++i) {
                 ItemStack stack = armorSlots[i];
                 if (stack != null && stack.getItem() instanceof ISpecialShieldArmor) {
-                    count ++;
-                    hasSpecialArmor = true;
+//                    count ++;
+                    this.hasSpecialArmor = true;
                     ISpecialShieldArmor armor = (ISpecialShieldArmor)stack.getItem();
                     ++this.peaces;
                     this.allocation[i] = ItemNBTHelper.getFloat(stack, "ProtectionPoints", 0.0F);
@@ -443,14 +444,18 @@ public class SpecialArmorHandler {
                             }
                     }
                 }
-                if (count == 4){
-                    this.allSpecialArmor = true;
-                }
+//                if (count == 4){
+//                    this.allSpecialArmor = true;
+//                }
             }
 
-            if (this.peaces == 0) {
-                return null;
-            } else {
+            if (this.peaces == 4) {
+                this.allSpecialArmor = true;
+                return this;
+            }
+            if (this.peaces == 0){
+                return this;
+            }else {
                 this.entropy = totalEntropy / (float)this.peaces;
                 this.meanRecoveryPoints = totalRecoveryPoints / this.peaces;
                 return this;
